@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  flatpak-build:
+    name: "Verify Flatpak Build"
+    permissions:
+      contents: read
+    uses: ./.github/workflows/build-flatpak.yml
+    with:
+      branch: beta
+      dry-run: true

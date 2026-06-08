@@ -1,0 +1,35 @@
+name: Build Flatpak
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: "Dry run mode. Build and verify everything, but skip pushing to the registry and publishing the site."
+        required: false
+        type: boolean
+        default: false
+      branch:
+        description: "Flatpak branch to use for build."
+        required: false
+        type: string
+        default: "beta"
+    secrets:
+      gpg-private-key:
+        description: "Optional GPG private key for signing flatpak repository metadata."
+        required: false
+    outputs:
+      pages-url:
+        description: "Public URL of the flatpak repository landing page."
+        value: ${{ jobs.build.outputs.pages-url }}
+
+jobs:
+  build:
+    name: "Build and Deploy"
+    uses: aetherpak/actions/.github/workflows/publish.yml@v3
+    with:
+      branch: ${{ inputs.branch }}
+      run-linter: true
+      upload-bundle: true
+      dry-run: ${{ inputs.dry-run }}
+    secrets:
+      gpg-private-key: ${{ secrets.gpg-private-key }}

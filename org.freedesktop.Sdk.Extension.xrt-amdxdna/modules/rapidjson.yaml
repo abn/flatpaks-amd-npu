@@ -1,0 +1,14 @@
+name: rapidjson
+buildsystem: simple
+build-commands:
+  - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$FLATPAK_DEST -DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_THIRDPARTY_GTEST=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
+  - cd build && make -j${FLATPAK_BUILDER_N_JOBS:-4} install
+cleanup:
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
+sources:
+  - type: git
+    url: https://github.com/Tencent/rapidjson.git
+    branch: master
+    commit: 24b5e7a8b27f42fa16b96fc70aade9106cf7102f

@@ -1,0 +1,9 @@
+remote_name: amd-npu
+arches:
+  - x86_64
+
+apps:
+  - id: org.freedesktop.Sdk.Extension.xrt-amdxdna
+    manifest: org.freedesktop.Sdk.Extension.xrt-amdxdna/org.freedesktop.Sdk.Extension.xrt-amdxdna.yaml
+    builder_args:
+      - --install-deps-from=flathub

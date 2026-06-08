@@ -1,0 +1,12 @@
+id: org.freedesktop.Sdk.Extension.xrt-amdxdna
+branch: '25.08'
+runtime: org.freedesktop.Sdk
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+build-extension: true
+
+modules:
+  - modules/opencl-headers.yaml
+  - modules/rapidjson.yaml
+  - modules/boost.yaml
+  - modules/xrt.yaml

@@ -1,0 +1,11 @@
+--- a/xrt/src/CMake/nativeLnx.cmake
++++ b/xrt/src/CMake/nativeLnx.cmake
+@@ -147,7 +147,7 @@
+ endif()
+ 
+ # --- Python bindings ---
+-xrt_add_subdirectory(python)
++# xrt_add_subdirectory(python)
+ 
+ message("-- XRT version: ${XRT_VERSION_STRING}")
+ 

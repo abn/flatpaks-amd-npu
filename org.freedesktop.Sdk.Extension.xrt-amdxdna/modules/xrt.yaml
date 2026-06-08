@@ -2,15 +2,6 @@ name: xrt
 buildsystem: simple
 build-commands:
   - mkdir -p build_bin && ln -sf /usr/bin/cmake build_bin/cmake3
-  - sed -i 's|xrt_add_subdirectory(python)|# xrt_add_subdirectory(python)|g' xrt/src/CMake/nativeLnx.cmake
-  - sed -i 's|#include <sys/sdt.h>|#define STAP_PROBEV(...)\n#define DTRACE_PROBE(...)\n#define DTRACE_PROBE1(...)\n#define DTRACE_PROBE2(...)|g' xrt/src/runtime_src/core/common/detail/linux/trace.h
-  - |
-    python3 -c '
-    p="xrt/src/runtime_src/xocl/CMakeLists.txt"
-    c=open(p).read()
-    c=c.replace("include_directories(\n  ${Boost_INCLUDE_DIRS}\n  ${XRT_SOURCE_DIR}/include/1_2\n)", "include_directories(BEFORE\n  ${XRT_SOURCE_DIR}/include/1_2\n)\ninclude_directories(\n  ${Boost_INCLUDE_DIRS}\n)")
-    open(p,"w").write(c)'
-  - sed -i 's|if("${XDNA_CPACK_LINUX_PKG_FLAVOR}" MATCHES "debian")|set(XDNA_CPACK_LINUX_PKG_FLAVOR "debian")\nif("${XDNA_CPACK_LINUX_PKG_FLAVOR}" MATCHES "debian")|g' CMake/pkg.cmake
   - PATH=$PWD/build_bin:$PATH cd xrt/build && ./build.sh -npu -opt -noctest -noinit -disable-werror -cmake-flags "-DXRT_UPSTREAM_DEBIAN=ON -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DRapidJSON_DIR=$FLATPAK_DEST/lib/cmake/RapidJSON -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include" -install_prefix $FLATPAK_DEST -j ${FLATPAK_BUILDER_N_JOBS:-4}
   - cp -a xrt/build/Release$FLATPAK_DEST/* $FLATPAK_DEST/
   - install -Dm755 xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh $FLATPAK_DEST/bin/smi_install_archive.sh
@@ -20,3 +11,11 @@ sources:
   - type: git
     url: https://github.com/amd/xdna-driver.git
     commit: 23ce43b2b8e790f6dbb50d75b20c08a914e69abc
+  - type: patch
+    path: patches/0001-disable-python-bindings.patch
+  - type: patch
+    path: patches/0002-stub-sdt-probes.patch
+  - type: patch
+    path: patches/0003-xocl-include-order.patch
+  - type: patch
+    path: patches/0004-force-debian-pkg-flavor.patch

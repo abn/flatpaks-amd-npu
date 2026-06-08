@@ -1,0 +1,14 @@
+--- a/xrt/src/runtime_src/core/common/detail/linux/trace.h
++++ b/xrt/src/runtime_src/core/common/detail/linux/trace.h
+@@ -3,7 +3,10 @@
+ #include "core/common/trace.h"
+ 
+ #define SDT_USE_VARIADIC
+-#include <sys/sdt.h>
++#define STAP_PROBEV(...)
++#define DTRACE_PROBE(...)
++#define DTRACE_PROBE1(...)
++#define DTRACE_PROBE2(...)
+ 
+ #define XRT_DETAIL_TRACE_POINT_LOG(probe, ...) \
+   STAP_PROBEV(xrt, probe##_log, ##__VA_ARGS__)

@@ -10,3 +10,10 @@ modules:
   - modules/rapidjson.yaml
   - modules/boost.yaml
   - modules/xrt.yaml
+  - name: appdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm0644 org.freedesktop.Sdk.Extension.xrt-amdxdna.appdata.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: file
+        path: org.freedesktop.Sdk.Extension.xrt-amdxdna.appdata.xml

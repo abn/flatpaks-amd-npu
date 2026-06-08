@@ -6,8 +6,11 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
+      # .patch files carry exact byte content; whitespace/newline fixes corrupt them.
       - id: trailing-whitespace
+        exclude: \.patch$
       - id: end-of-file-fixer
+        exclude: \.patch$
       - id: check-yaml
       - id: check-merge-conflict
       - id: check-added-large-files

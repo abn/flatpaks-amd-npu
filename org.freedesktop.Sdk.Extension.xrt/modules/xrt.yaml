@@ -7,6 +7,8 @@ build-commands:
   - install -Dm755 xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh $FLATPAK_DEST/bin/smi_install_archive.sh
   - mkdir build_plugin && cd build_plugin && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$FLATPAK_DEST -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DCMAKE_CXX_FLAGS="-I$FLATPAK_DEST/include" -DCMAKE_C_FLAGS="-I$FLATPAK_DEST/include" -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include -DSKIP_KMOD=ON -DBUILD_VXDNA=ON -DXRT_UPSTREAM=OFF .. && make -j${FLATPAK_BUILDER_N_JOBS:-4} && make install
   - if [ -d $FLATPAK_DEST/lib64 ]; then cp -a $FLATPAK_DEST/lib64/* $FLATPAK_DEST/lib/ && rm -rf $FLATPAK_DEST/lib64; fi
+  # flatpak-builder does not strip this prebuilt tree; strip explicitly.
+  - find $FLATPAK_DEST/lib $FLATPAK_DEST/bin -type f -exec sh -c 'file "$1" | grep -q "ELF" && strip --strip-unneeded "$1" || true' _ {} \;
 sources:
   - type: git
     url: https://github.com/amd/xdna-driver.git

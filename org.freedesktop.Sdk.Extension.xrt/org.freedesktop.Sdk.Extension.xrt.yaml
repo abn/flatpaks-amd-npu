@@ -5,6 +5,14 @@ runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 build-extension: true
 
+build-options:
+  no-debuginfo: true
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include/boost
+
 modules:
   - modules/opencl-headers.yaml
   - modules/rapidjson.yaml

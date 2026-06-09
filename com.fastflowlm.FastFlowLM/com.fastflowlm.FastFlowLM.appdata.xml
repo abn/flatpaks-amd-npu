@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>com.fastflowlm.FastFlowLM</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>FastFlowLM</name>
+  <summary>The fastest, most efficient LLM inference on NPUs</summary>
+  <icon type="stock">com.fastflowlm.FastFlowLM</icon>
+  <description>
+    <p>
+      FastFlowLM is an NPU-optimized runtime that delivers fast, efficient
+      language model inference on tile-structured neural processing units. It
+      provides an Ollama-style developer experience with quick installation,
+      instant token streaming, and support for context windows up to 256k
+      tokens.
+    </p>
+    <p>
+      It supports multiple AI modalities including reasoning models, vision,
+      audio, and embeddings, with general availability for AMD Ryzen AI NPUs.
+    </p>
+  </description>
+  <url type="homepage">https://fastflowlm.com/</url>
+  <url type="bugtracker">https://github.com/FastFlowLM/FastFlowLM/issues</url>
+  <provides>
+    <binary>flm</binary>
+  </provides>
+  <releases>
+    <release version="0.9.43" date="2026-06-09">
+      <description/>
+    </release>
+  </releases>
+</component>

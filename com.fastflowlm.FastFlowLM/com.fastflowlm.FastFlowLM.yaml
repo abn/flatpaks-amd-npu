@@ -1,0 +1,39 @@
+id: com.fastflowlm.FastFlowLM
+branch: 'stable'
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.xrt
+
+command: flm
+
+build-options:
+  no-debuginfo: true
+
+finish-args:
+  - --share=network
+  # NPU access: flatpak has no granular accel device, so /dev/accel/accel0 requires --device=all
+  - --device=all
+
+cleanup:
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /include/boost
+  - '*.a'
+
+modules:
+  - modules/fftw3f.yaml
+  - modules/boost.yaml
+  - modules/fastflowlm.yaml
+  - name: appdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm0644 com.fastflowlm.FastFlowLM.appdata.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm0644 com.fastflowlm.FastFlowLM.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/com.fastflowlm.FastFlowLM.png
+    sources:
+      - type: file
+        path: com.fastflowlm.FastFlowLM.appdata.xml
+      - type: file
+        path: com.fastflowlm.FastFlowLM.png

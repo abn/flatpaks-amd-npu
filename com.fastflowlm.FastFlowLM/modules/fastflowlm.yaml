@@ -1,0 +1,35 @@
+name: fastflowlm
+buildsystem: cmake-ninja
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_NET_OFFLINE: 'true'
+    LDFLAGS: -L$FLATPAK_DEST/lib -L$FLATPAK_DEST/lib64 -L/usr/lib/sdk/xrt/lib -L/usr/lib/sdk/xrt/lib64
+config-opts:
+  - -DFLM_VERSION=0.9.43
+  - -DNPU_VERSION=32.0.203.304
+  - -DCMAKE_PREFIX_PATH=$FLATPAK_DEST;/usr/lib/sdk/xrt
+  - -DXRT_INCLUDE_DIR=/usr/lib/sdk/xrt/include
+  - -DXRT_LIB_DIR=/usr/lib/sdk/xrt/lib
+  - -DCMAKE_XCLBIN_PREFIX=$FLATPAK_DEST/share/flm
+post-install:
+  - cp -pv /usr/lib/sdk/xrt/lib/*.so* $FLATPAK_DEST/lib/ || true
+  - cp -pv /usr/lib/sdk/xrt/lib64/*.so* $FLATPAK_DEST/lib/ || true
+  - chmod a+rX $FLATPAK_DEST/bin/flm
+subdir: src
+sources:
+  - type: git
+    url: https://github.com/FastFlowLM/FastFlowLM.git
+    commit: 5324dd73162e7005546d287aa4daeceff56e3b2c
+  - type: patch
+    path: 0001-fastflowlm-disable-usr-local-symlink.patch
+  - type: inline
+    contents: |
+      [source.crates-io]
+      replace-with = "vendored-sources"
+
+      [source.vendored-sources]
+      directory = "/run/build/fastflowlm/cargo/vendor"
+    dest: third_party/tokenizers-cpp/rust/.cargo
+    dest-filename: config.toml
+  - generated-flm-cargo-sources.json

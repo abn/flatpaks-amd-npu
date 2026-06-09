@@ -1,0 +1,32 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -229,18 +229,6 @@
+-    if(FFTW3_PKG_FOUND)
+-        target_include_directories(flm PUBLIC ${FFTW3_PKG_INCLUDE_DIRS})
+-        target_link_libraries(flm PUBLIC ${FFTW3_PKG_LIBRARIES})
+-    else()
+-        target_link_libraries(flm PUBLIC fftw3)
+-    endif()
+     if(FFTW3F_PKG_FOUND)
+         target_include_directories(flm PUBLIC ${FFTW3F_PKG_INCLUDE_DIRS})
+         target_link_libraries(flm PUBLIC ${FFTW3F_PKG_LIBRARIES})
+     else()
+         target_link_libraries(flm PUBLIC fftw3f)
+     endif()
+-    if(FFTW3L_PKG_FOUND)
+-        target_include_directories(flm PUBLIC ${FFTW3L_PKG_INCLUDE_DIRS})
+-        target_link_libraries(flm PUBLIC ${FFTW3L_PKG_LIBRARIES})
+-    else()
+-        target_link_libraries(flm PUBLIC fftw3l)
+-    endif()
+@@ -347,9 +331,0 @@
+-if(NOT WIN32 AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr" AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr/local")
+-    install(CODE "
+-        message(STATUS \"Creating symlink for flm\")
+-        file(MAKE_DIRECTORY \"$ENV{DESTDIR}/usr/local/bin\")
+-        execute_process(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink
+-            \"${CMAKE_INSTALL_PREFIX}/bin/flm\"
+-            \"$ENV{DESTDIR}/usr/local/bin/flm\")"
+-    )
+-endif()

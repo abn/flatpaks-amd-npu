@@ -12,6 +12,11 @@ on:
         required: false
         type: string
         default: "beta"
+      app-id:
+        description: "Verify only this app id."
+        required: false
+        type: string
+        default: ""
 
 jobs:
   flatpak-build:
@@ -21,4 +26,5 @@ jobs:
     uses: ./.github/workflows/build-flatpak.yml
     with:
       branch: ${{ inputs.branch || 'beta' }}
+      app-id: ${{ inputs.app-id || '' }}
       dry-run: true

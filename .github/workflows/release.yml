@@ -2,6 +2,17 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      app-id:
+        description: "App id to rebuild."
+        required: false
+        type: string
+        default: ""
+      reconcile:
+        description: "Reconcile the index against the registry."
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -13,6 +24,9 @@ jobs:
       id-token: write
     uses: ./.github/workflows/build-flatpak.yml
     with:
+      app-id: ${{ inputs.app-id }}
+      reconcile-only: ${{ inputs.reconcile && inputs.app-id == '' }}
+      force-all: ${{ !inputs.reconcile && inputs.app-id == '' }}
       dry-run: false
     secrets:
       gpg-private-key: ${{ secrets.AETHERPAK_GPG_KEY }}

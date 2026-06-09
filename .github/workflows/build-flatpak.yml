@@ -13,6 +13,21 @@ on:
         required: false
         type: string
         default: "beta"
+      app-id:
+        description: "Rebuild only this app id."
+        required: false
+        type: string
+        default: ""
+      force-all:
+        description: "Rebuild every app."
+        required: false
+        type: boolean
+        default: false
+      reconcile-only:
+        description: "Reconcile index only."
+        required: false
+        type: boolean
+        default: false
     secrets:
       gpg-private-key:
         description: "Optional GPG private key for signing flatpak repository metadata."
@@ -28,6 +43,9 @@ jobs:
     uses: aetherpak/actions/.github/workflows/publish.yml@main
     with:
       branch: ${{ inputs.branch }}
+      app: ${{ inputs.app-id }}
+      force-all: ${{ inputs.force-all }}
+      reconcile-only: ${{ inputs.reconcile-only }}
       run-linter: true
       upload-bundle: true
       dry-run: ${{ inputs.dry-run }}

@@ -21,3 +21,5 @@ sources:
     path: patches/0003-xocl-include-order.patch
   - type: patch
     path: patches/0004-force-debian-pkg-flavor.patch
+  - type: patch
+    path: patches/0005-smi-archive-honor-xdg-data-home.patch

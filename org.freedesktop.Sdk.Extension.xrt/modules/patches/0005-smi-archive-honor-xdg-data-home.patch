@@ -1,0 +1,11 @@
+--- a/xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh
++++ b/xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh
+@@ -71,7 +71,7 @@
+         echo "ERROR: HOME environment variable is not set and no custom install directory provided" >&2
+         exit 1
+     fi
+-    INSTALL_DIR="${HOME}/.local/share/xrt/${XRT_VERSION}/amdxdna/bins"
++    INSTALL_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/xrt/${XRT_VERSION}/amdxdna/bins"
+ fi
+ 
+ # Archive filename and URL (archives are in platform-specific subdirectories)

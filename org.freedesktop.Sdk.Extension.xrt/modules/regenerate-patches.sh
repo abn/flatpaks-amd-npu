@@ -81,4 +81,10 @@ cp "$SRC/$f" "$SRC/$f.orig"
 sed -i 's|if("${XDNA_CPACK_LINUX_PKG_FLAVOR}" MATCHES "debian")|set(XDNA_CPACK_LINUX_PKG_FLAVOR "debian")\nif("${XDNA_CPACK_LINUX_PKG_FLAVOR}" MATCHES "debian")|g' "$SRC/$f"
 gen "$f" "0004-force-debian-pkg-flavor.patch"
 
-echo "Done. Regenerated 4 patch(es) in $PATCH_DIR"
+# --- transform 5: archive install dir honors XDG_DATA_HOME (matches xrt-smi platform_repo_path) ---
+f="xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh"
+cp "$SRC/$f" "$SRC/$f.orig"
+sed -i 's|INSTALL_DIR="${HOME}/.local/share/xrt/${XRT_VERSION}/amdxdna/bins"|INSTALL_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/xrt/${XRT_VERSION}/amdxdna/bins"|' "$SRC/$f"
+gen "$f" "0005-smi-archive-honor-xdg-data-home.patch"
+
+echo "Done. Regenerated 5 patch(es) in $PATCH_DIR"

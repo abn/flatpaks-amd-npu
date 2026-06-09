@@ -2,11 +2,7 @@ remote_name: amd-npu
 arches:
   - x86_64
 defaults:
-  builder_args:
-    - --install-deps-from=flathub
-    - --install-deps-from=amd-npu
   remotes:
-    flathub: https://dl.flathub.org/repo/flathub.flatpakrepo
     amd-npu: https://abn.github.io/flatpaks-amd-npu/amd-npu.flatpakrepo
 apps:
   - id: org.freedesktop.Sdk.Extension.xrt

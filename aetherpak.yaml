@@ -9,3 +9,5 @@ apps:
     manifest: org.freedesktop.Sdk.Extension.xrt/org.freedesktop.Sdk.Extension.xrt.yaml
   - id: com.fastflowlm.FastFlowLM
     manifest: com.fastflowlm.FastFlowLM/com.fastflowlm.FastFlowLM.yaml
+  - id: io.github.xilinx.XRT
+    manifest: io.github.xilinx.XRT/io.github.xilinx.XRT.yaml

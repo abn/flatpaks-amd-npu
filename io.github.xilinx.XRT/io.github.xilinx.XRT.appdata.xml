@@ -3,11 +3,11 @@
   <id>io.github.xilinx.XRT</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>Apache-2.0</project_license>
-  <name>AMD XDNA (XRT) Platform</name>
+  <name>AMD XDNA (XRT) Tools</name>
   <summary>XRT runtime for AMD XDNA NPUs</summary>
   <url type="homepage">https://github.com/amd/xdna-driver</url>
   <releases>
-    <release version="2.21.75+g23ce43b" date="2026-06-02">
+    <release version="2.25.0+g87817ac" date="2026-06-09">
       <description/>
     </release>
   </releases>

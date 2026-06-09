@@ -15,6 +15,7 @@ config-opts:
 post-install:
   - cp -pv /usr/lib/sdk/xrt/lib/*.so* $FLATPAK_DEST/lib/ || true
   - cp -pv /usr/lib/sdk/xrt/lib64/*.so* $FLATPAK_DEST/lib/ || true
+  - cp -a /usr/lib/sdk/xrt/lib/xrt $FLATPAK_DEST/lib/ 2>/dev/null || true
   - chmod a+rX $FLATPAK_DEST/bin/flm
 subdir: src
 sources:

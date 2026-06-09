@@ -1,0 +1,13 @@
+--- a/xrt/src/runtime_src/core/tools/common/tests/TestNPUThroughput.cpp
++++ b/xrt/src/runtime_src/core/tools/common/tests/TestNPUThroughput.cpp
+@@ -46,7 +46,9 @@
+     runner.wait();
+ 
+     auto report = json::parse(runner.get_report());
+-    XBValidateUtils::logger(ptree, "Details", boost::str(boost::format("Average throughput: %.1f op/s") % report["cpu"]["throughput"].get<double>()));
++    // Newer validation archives report throughput under executions[]; fall back to legacy top-level cpu
++    const auto& tput = report.contains("executions") ? report.at("executions").at(0).at("cpu") : report.at("cpu");
++    XBValidateUtils::logger(ptree, "Details", boost::str(boost::format("Average throughput: %.1f op/s") % tput.at("throughput").get<double>()));
+     ptree.put("status", XBValidateUtils::test_token_passed);
+   }
+   catch(const std::exception& e) {

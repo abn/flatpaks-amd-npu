@@ -87,4 +87,22 @@ cp "$SRC/$f" "$SRC/$f.orig"
 sed -i 's|INSTALL_DIR="${HOME}/.local/share/xrt/${XRT_VERSION}/amdxdna/bins"|INSTALL_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/xrt/${XRT_VERSION}/amdxdna/bins"|' "$SRC/$f"
 gen "$f" "0005-smi-archive-honor-xdg-data-home.patch"
 
-echo "Done. Regenerated 5 patch(es) in $PATCH_DIR"
+# --- transform 6: throughput test reads executions[] report format (backport of upstream) ---
+f="xrt/src/runtime_src/core/tools/common/tests/TestNPUThroughput.cpp"
+cp "$SRC/$f" "$SRC/$f.orig"
+python3 - "$SRC/$f" <<'PY'
+import sys
+p = sys.argv[1]
+c = open(p).read()
+old = '''    auto report = json::parse(runner.get_report());
+    XBValidateUtils::logger(ptree, "Details", boost::str(boost::format("Average throughput: %.1f op/s") % report["cpu"]["throughput"].get<double>()));'''
+new = '''    auto report = json::parse(runner.get_report());
+    // Newer validation archives report throughput under executions[]; fall back to legacy top-level cpu
+    const auto& tput = report.contains("executions") ? report.at("executions").at(0).at("cpu") : report.at("cpu");
+    XBValidateUtils::logger(ptree, "Details", boost::str(boost::format("Average throughput: %.1f op/s") % tput.at("throughput").get<double>()));'''
+c = c.replace(old, new)
+open(p, "w").write(c)
+PY
+gen "$f" "0006-throughput-test-executions-format.patch"
+
+echo "Done. Regenerated 6 patch(es) in $PATCH_DIR"

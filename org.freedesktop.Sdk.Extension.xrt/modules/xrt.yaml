@@ -12,7 +12,7 @@ build-commands:
 sources:
   - type: git
     url: https://github.com/amd/xdna-driver.git
-    commit: 23ce43b2b8e790f6dbb50d75b20c08a914e69abc
+    commit: 87817ac7c2200c98a53f3ad7b39460595999b3f6
   - type: patch
     path: patches/0001-disable-python-bindings.patch
   - type: patch
@@ -23,3 +23,5 @@ sources:
     path: patches/0004-force-debian-pkg-flavor.patch
   - type: patch
     path: patches/0005-smi-archive-honor-xdg-data-home.patch
+  - type: patch
+    path: patches/0006-throughput-test-executions-format.patch

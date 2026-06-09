@@ -1,0 +1,32 @@
+id: io.github.xilinx.XRT
+branch: 'stable'
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.xrt
+
+command: xrt-smi
+
+build-options:
+  no-debuginfo: true
+
+finish-args:
+  - --share=network
+  # NPU access: flatpak has no granular accel device, so /dev/accel/accel0 requires --device=all
+  - --device=all
+
+modules:
+  - name: copy-runtime-assets
+    buildsystem: simple
+    build-commands:
+      - install -d $FLATPAK_DEST/bin $FLATPAK_DEST/lib
+      - cp -av /usr/lib/sdk/xrt/bin /usr/lib/sdk/xrt/lib /usr/lib/sdk/xrt/license /usr/lib/sdk/xrt/setup.* /usr/lib/sdk/xrt/version.json $FLATPAK_DEST
+  - name: appdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm0644 io.github.xilinx.XRT.appdata.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: file
+        path: io.github.xilinx.XRT.appdata.xml

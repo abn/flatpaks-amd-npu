@@ -18,6 +18,7 @@ finish-args:
   # NPU access: flatpak has no granular accel device, so /dev/accel/accel0 requires --device=all
   - --device=all
   - --env=XILINX_XRT=/app
+  - --env=LD_LIBRARY_PATH=/app/lib
 
 cleanup:
   - /lib/cmake

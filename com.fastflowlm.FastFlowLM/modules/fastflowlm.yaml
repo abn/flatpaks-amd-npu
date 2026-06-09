@@ -8,10 +8,10 @@ build-options:
 config-opts:
   - -DFLM_VERSION=0.9.43
   - -DNPU_VERSION=32.0.203.304
-  - -DCMAKE_PREFIX_PATH=$FLATPAK_DEST;/usr/lib/sdk/xrt
+  - -DCMAKE_PREFIX_PATH=/app;/usr/lib/sdk/xrt
   - -DXRT_INCLUDE_DIR=/usr/lib/sdk/xrt/include
   - -DXRT_LIB_DIR=/usr/lib/sdk/xrt/lib
-  - -DCMAKE_XCLBIN_PREFIX=$FLATPAK_DEST/share/flm
+  - -DCMAKE_XCLBIN_PREFIX=/app/share/flm
 post-install:
   - cp -pv /usr/lib/sdk/xrt/lib/*.so* $FLATPAK_DEST/lib/ || true
   - cp -pv /usr/lib/sdk/xrt/lib64/*.so* $FLATPAK_DEST/lib/ || true

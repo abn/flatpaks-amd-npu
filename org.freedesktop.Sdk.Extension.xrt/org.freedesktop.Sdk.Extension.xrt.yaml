@@ -1,4 +1,4 @@
-id: org.freedesktop.Sdk.Extension.xrt-amdxdna
+id: org.freedesktop.Sdk.Extension.xrt
 branch: '25.08'
 runtime: org.freedesktop.Sdk
 runtime-version: '25.08'
@@ -13,7 +13,7 @@ modules:
   - name: appdata
     buildsystem: simple
     build-commands:
-      - install -Dm0644 org.freedesktop.Sdk.Extension.xrt-amdxdna.appdata.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm0644 org.freedesktop.Sdk.Extension.xrt.appdata.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: file
-        path: org.freedesktop.Sdk.Extension.xrt-amdxdna.appdata.xml
+        path: org.freedesktop.Sdk.Extension.xrt.appdata.xml

@@ -25,7 +25,7 @@ on:
 jobs:
   build:
     name: "Build and Deploy"
-    uses: aetherpak/actions/.github/workflows/publish.yml@v3
+    uses: aetherpak/actions/.github/workflows/publish.yml@main
     with:
       branch: ${{ inputs.branch }}
       run-linter: true

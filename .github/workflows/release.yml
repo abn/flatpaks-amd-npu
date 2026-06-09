@@ -13,6 +13,11 @@ on:
         required: false
         type: boolean
         default: false
+      rebuild:
+        description: "Force all apps to be rebuilt."
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -26,7 +31,7 @@ jobs:
     with:
       app-id: ${{ inputs.app-id }}
       reconcile-only: ${{ inputs.reconcile && inputs.app-id == '' }}
-      force-all: ${{ !inputs.reconcile && inputs.app-id == '' }}
+      force-all: ${{ inputs.rebuild || (!inputs.reconcile && inputs.app-id == '') }}
       dry-run: false
     secrets:
       gpg-private-key: ${{ secrets.AETHERPAK_GPG_KEY }}

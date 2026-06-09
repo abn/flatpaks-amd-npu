@@ -17,6 +17,11 @@ on:
         required: false
         type: string
         default: ""
+      rebuild:
+        description: "Force all apps to be rebuilt."
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   flatpak-build:
@@ -27,4 +32,5 @@ jobs:
     with:
       branch: ${{ inputs.branch || 'beta' }}
       app-id: ${{ inputs.app-id || '' }}
+      force-all: ${{ inputs.rebuild || false }}
       dry-run: true

@@ -17,6 +17,7 @@ finish-args:
   - --share=network
   # NPU access: flatpak has no granular accel device, so /dev/accel/accel0 requires --device=all
   - --device=all
+  - --persist=.config/flm
   - --env=XILINX_XRT=/app
   - --env=LD_LIBRARY_PATH=/app/lib
 

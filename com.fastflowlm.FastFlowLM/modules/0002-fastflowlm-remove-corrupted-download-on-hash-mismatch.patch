@@ -1,0 +1,12 @@
+diff --git a/src/pull/download_model.cpp b/src/pull/download_model.cpp
+index 0710ed8..b1f4105 100644
+--- a/src/pull/download_model.cpp
++++ b/src/pull/download_model.cpp
+@@ -188,6 +188,7 @@ bool download_file(const std::string& url, const std::string& local_path, bool i
+     std::string local_oid = is_lfs ? calculate_file_sha256(local_path) : calculate_git_blob_oid(local_path);
+     if (local_oid != remote_oid) {
+         header_print("FLM", "Hash not matched!");
++        std::filesystem::remove(local_path);
+         show_cursor(); // Show cursor on error
+         return false;
+     }

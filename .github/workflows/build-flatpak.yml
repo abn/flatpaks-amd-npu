@@ -12,7 +12,7 @@ on:
         description: "Flatpak branch to use for build."
         required: false
         type: string
-        default: "beta"
+        default: ""
       app-id:
         description: "Rebuild only this app id."
         required: false

@@ -1,7 +1,7 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -229,18 +229,6 @@
+@@ -498,18 +498,6 @@
 -    if(FFTW3_PKG_FOUND)
 -        target_include_directories(flm PUBLIC ${FFTW3_PKG_INCLUDE_DIRS})
 -        target_link_libraries(flm PUBLIC ${FFTW3_PKG_LIBRARIES})
@@ -20,8 +20,8 @@ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 -    else()
 -        target_link_libraries(flm PUBLIC fftw3l)
 -    endif()
-@@ -347,9 +331,0 @@
--if(NOT WIN32 AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr" AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr/local")
+@@ -740,9 +728,0 @@
+-if(NOT WIN32 AND NOT FLM_PORTABLE_BUILD AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr" AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr/local")
 -    install(CODE "
 -        message(STATUS \"Creating symlink for flm\")
 -        file(MAKE_DIRECTORY \"$ENV{DESTDIR}/usr/local/bin\")

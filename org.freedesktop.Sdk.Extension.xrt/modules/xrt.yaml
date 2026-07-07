@@ -2,17 +2,18 @@ name: xrt
 buildsystem: simple
 build-commands:
   - mkdir -p build_bin && ln -sf /usr/bin/cmake build_bin/cmake3
-  - PATH=$PWD/build_bin:$PATH cd xrt/build && ./build.sh -npu -opt -noctest -noinit -disable-werror -cmake-flags "-DXRT_UPSTREAM_DEBIAN=ON -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DRapidJSON_DIR=$FLATPAK_DEST/lib/cmake/RapidJSON -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include" -install_prefix $FLATPAK_DEST -j ${FLATPAK_BUILDER_N_JOBS:-4}
+  - PATH=$PWD/build_bin:$PATH cd xrt/build && ./build.sh -npu -opt -noctest -noinit -disable-werror -cmake-flags "-DXRT_UPSTREAM_DEBIAN=ON -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DRapidJSON_DIR=$FLATPAK_DEST/lib/cmake/RapidJSON -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include -DXRT_ENABLE_USDT=OFF" -install_prefix $FLATPAK_DEST -j ${FLATPAK_BUILDER_N_JOBS:-4}
   - cp -a xrt/build/Release$FLATPAK_DEST/* $FLATPAK_DEST/
   - install -Dm755 xrt/src/runtime_src/core/tools/xbutil2/smi_install_archive.sh $FLATPAK_DEST/bin/smi_install_archive.sh
-  - mkdir build_plugin && cd build_plugin && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$FLATPAK_DEST -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DCMAKE_CXX_FLAGS="-I$FLATPAK_DEST/include" -DCMAKE_C_FLAGS="-I$FLATPAK_DEST/include" -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include -DSKIP_KMOD=ON -DBUILD_VXDNA=ON -DXRT_UPSTREAM=OFF .. && make -j${FLATPAK_BUILDER_N_JOBS:-4} && make install
+  - mkdir build_plugin && cd build_plugin && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$FLATPAK_DEST -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$FLATPAK_DEST -DCMAKE_CXX_FLAGS="-I$FLATPAK_DEST/include" -DCMAKE_C_FLAGS="-I$FLATPAK_DEST/include" -DOpenCL_INCLUDE_DIR=$FLATPAK_DEST/include -DSKIP_KMOD=ON -DBUILD_VXDNA=ON -DXRT_UPSTREAM=OFF -DXRT_ENABLE_USDT=OFF .. && make -j${FLATPAK_BUILDER_N_JOBS:-4} && make install
   - if [ -d $FLATPAK_DEST/lib64 ]; then cp -a $FLATPAK_DEST/lib64/* $FLATPAK_DEST/lib/ && rm -rf $FLATPAK_DEST/lib64; fi
   # flatpak-builder does not strip this prebuilt tree; strip explicitly.
   - find $FLATPAK_DEST/lib $FLATPAK_DEST/bin -type f -exec sh -c 'file "$1" | grep -q "ELF" && strip --strip-unneeded "$1" || true' _ {} \;
 sources:
   - type: git
     url: https://github.com/amd/xdna-driver.git
-    commit: 87817ac7c2200c98a53f3ad7b39460595999b3f6
+    commit: 8cd5105b150bed19975d9217fae247d5cae73c29
+    disable-lfs: true
   - type: patch
     path: patches/0001-disable-python-bindings.patch
   - type: patch
@@ -23,5 +24,3 @@ sources:
     path: patches/0004-force-debian-pkg-flavor.patch
   - type: patch
     path: patches/0005-smi-archive-honor-xdg-data-home.patch
-  - type: patch
-    path: patches/0006-throughput-test-executions-format.patch

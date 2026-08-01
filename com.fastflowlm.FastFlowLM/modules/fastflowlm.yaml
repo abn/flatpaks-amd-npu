@@ -26,6 +26,7 @@ sources:
     path: 0001-fastflowlm-disable-usr-local-symlink.patch
   - type: patch
     path: 0002-fastflowlm-remove-corrupted-download-on-hash-mismatch.patch
+    options: ["--binary"]
   - type: inline
     contents: |
       [source.crates-io]

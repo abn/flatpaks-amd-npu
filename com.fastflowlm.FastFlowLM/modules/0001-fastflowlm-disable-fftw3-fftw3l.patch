@@ -1,0 +1,15 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -299,3 +299,1 @@
+-    pkg_check_modules(FFTW3 REQUIRED IMPORTED_TARGET fftw3)
+     pkg_check_modules(FFTW3F REQUIRED IMPORTED_TARGET fftw3f)
+-    pkg_check_modules(FFTW3L REQUIRED IMPORTED_TARGET fftw3l)
+@@ -504,3 +502,1 @@
+-        PkgConfig::FFTW3
+         PkgConfig::FFTW3F
+-        PkgConfig::FFTW3L
+@@ -513,3 +509,1 @@
+-        PkgConfig::FFTW3
+         PkgConfig::FFTW3F
+-        PkgConfig::FFTW3L

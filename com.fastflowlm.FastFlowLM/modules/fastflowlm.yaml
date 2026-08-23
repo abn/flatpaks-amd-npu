@@ -6,7 +6,7 @@ build-options:
     CARGO_NET_OFFLINE: 'true'
     LDFLAGS: -L$FLATPAK_DEST/lib -L$FLATPAK_DEST/lib64 -L/usr/lib/sdk/xrt/lib -L/usr/lib/sdk/xrt/lib64
 config-opts:
-  - -DFLM_VERSION=1.0.0
+  - -DFLM_VERSION=1.0.2
   - -DNPU_VERSION=32.0.203.304
   - -DCMAKE_PREFIX_PATH=/app;/usr/lib/sdk/xrt
   - -DXRT_INCLUDE_DIR=/usr/lib/sdk/xrt/include
@@ -21,7 +21,7 @@ subdir: src
 sources:
   - type: git
     url: https://github.com/FastFlowLM/FastFlowLM.git
-    commit: 39fb58cc7f9e23d97b764a1ef21ff0ade088047b
+    commit: efa3cb711e9ad53842dc2c48a99e87bfc75c2cc6
   - type: patch
     path: 0001-fastflowlm-disable-fftw3-fftw3l.patch
   - type: patch

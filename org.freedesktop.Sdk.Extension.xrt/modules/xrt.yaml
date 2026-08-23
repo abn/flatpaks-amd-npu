@@ -12,7 +12,7 @@ build-commands:
 sources:
   - type: git
     url: https://github.com/amd/xdna-driver.git
-    commit: d73478232a7057bfea73a24f74b09df4e5580ad8
+    commit: 856409cafc23cee55976ebcaa0a073ab4ec6dfe2
     disable-lfs: true
   - type: patch
     path: patches/0001-disable-python-bindings.patch

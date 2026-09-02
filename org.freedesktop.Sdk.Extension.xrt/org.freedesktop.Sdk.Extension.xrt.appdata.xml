@@ -7,6 +7,9 @@
   <summary>XRT runtime and tools for AMD XDNA NPUs</summary>
   <url type="homepage">https://github.com/amd/xdna-driver</url>
   <releases>
+    <release version="2.26.95+gce5da00" date="2026-09-02">
+      <description/>
+    </release>
     <release version="2.26.95+g856409c" date="2026-08-22">
       <description/>
     </release>

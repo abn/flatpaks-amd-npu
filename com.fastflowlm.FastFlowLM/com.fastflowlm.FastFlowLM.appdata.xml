@@ -25,6 +25,9 @@
     <binary>flm</binary>
   </provides>
   <releases>
+    <release version="1.0.9" date="2026-10-15">
+      <description/>
+    </release>
     <release version="1.0.7" date="2026-09-29">
       <description/>
     </release>

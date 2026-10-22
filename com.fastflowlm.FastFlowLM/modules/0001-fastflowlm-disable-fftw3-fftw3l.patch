@@ -1,8 +1,8 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 21e769f..aeee585 100644
+index c53826f1..7d364723 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -296,9 +296,7 @@ else()
+@@ -386,9 +386,7 @@ else()
      find_package(CURL REQUIRED)
      find_package(Threads REQUIRED)
      find_package(PkgConfig REQUIRED)
@@ -12,7 +12,7 @@ index 21e769f..aeee585 100644
      # Portable builds link FFmpeg statically (built from source above), so the
      # system FFmpeg is only resolved via pkg-config for non-portable builds.
      if(NOT FFMPEG_BUILT_FROM_SOURCE)
-@@ -514,18 +512,14 @@ elseif(FFMPEG_BUILT_FROM_SOURCE)
+@@ -634,18 +632,14 @@ elseif(FFMPEG_BUILT_FROM_SOURCE)
          ${_flm_zlib_lib}
          Boost::program_options
          CURL::libcurl

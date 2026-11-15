@@ -1,6 +1,6 @@
 --- a/xrt/src/CMake/nativeLnx.cmake
 +++ b/xrt/src/CMake/nativeLnx.cmake
-@@ -143,7 +143,7 @@
+@@ -148,7 +148,7 @@
  endif()
  
  # --- Python bindings ---

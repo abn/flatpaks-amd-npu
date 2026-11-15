@@ -1,6 +1,6 @@
 --- a/CMake/pkg.cmake
 +++ b/CMake/pkg.cmake
-@@ -133,6 +133,7 @@
+@@ -134,6 +134,7 @@
  
  endif(NOT SKIP_KMOD)
  

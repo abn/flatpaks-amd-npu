@@ -27,8 +27,8 @@ cleanup:
   - '*.a'
 
 modules:
-  - modules/fftw3f.yaml
   - modules/boost.yaml
+  - modules/libedit.yaml
   - modules/fastflowlm.yaml
   - name: appdata
     buildsystem: simple

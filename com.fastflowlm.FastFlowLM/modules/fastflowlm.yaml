@@ -2,6 +2,8 @@ name: fastflowlm
 buildsystem: cmake-ninja
 build-options:
   append-path: /usr/lib/sdk/rust-stable/bin
+  build-args:
+    - --share=network
   env:
     CARGO_NET_OFFLINE: 'true'
     LDFLAGS: -L$FLATPAK_DEST/lib -L$FLATPAK_DEST/lib64 -L/usr/lib/sdk/xrt/lib -L/usr/lib/sdk/xrt/lib64
